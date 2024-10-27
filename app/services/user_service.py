@@ -13,7 +13,7 @@ from app.repositories.user_repository import (
     get_all_users,
     create_user,
 )
-from app.schema.shema import UserCreate
+from app.schema.user_schema import UserCreate
 
 
 def register_user(db: Session, user: UserCreate):
