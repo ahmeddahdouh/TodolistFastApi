@@ -9,23 +9,23 @@ from app.services import task_service
 
 task_router = APIRouter()
 
-@task_router.post("/task")
+@task_router.post("/task",tags=["taches"])
 async def create_task(task:TaskCreate,db : db_dependency):
     return task_service.create_task(db,task)
 
 
-@task_router.get("/task")
+@task_router.get("/tasks",tags=["taches"])
 async def get_tasks(db : db_dependency):
     return task_service.get_tasks(db)
 
-@task_router.get("/task/{task_id}")
+@task_router.get("/task/{task_id}",tags=["taches"])
 async def get_task(task_id: int, db: db_dependency):
     task = task_service.get_task_by_id(db, task_id)
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
     return task
 
-@task_router.put("/task/{task_id}")
+@task_router.put("/task/{task_id}",tags=["taches"])
 async def update_task(task_id: int, task_data: TaskCreate, db:db_dependency):
     print("\n \n"+ task_data.title +"\n \n")
     try:
@@ -33,3 +33,7 @@ async def update_task(task_id: int, task_data: TaskCreate, db:db_dependency):
         return updated_task
     except HTTPException as e:
         raise e
+
+@task_router.delete("/task/{task_id}",tags=["taches"])
+async def delete_task(task_id: int, db: db_dependency):
+    return task_service.delete_task(db, task_id)

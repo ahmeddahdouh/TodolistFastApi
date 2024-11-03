@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from sqlmodel import Session
 from app.models.models import Task
 from app.schema.task_schema import TaskCreate, TaskBase
@@ -30,3 +31,16 @@ def update_task(db: Session, task: Task) -> Task:
         db.commit()
         db.refresh(task)
         return task
+
+
+def delete_task(session: Session, task_id: int):
+    # Récupérer l'utilisateur que tu souhaites supprimer
+    task = session.query(Task).filter(Task.id == task_id).first()
+
+    # Vérifie si l'utilisateur existe
+    if task:
+        session.delete(task)
+        session.commit()
+        return {"message": "User deleted successfully"}
+    else:
+         raise HTTPException(status_code=404, detail="Task not found")

@@ -13,7 +13,7 @@ def create_task(db:Session,task:TaskCreate):
     return create_task_repo(task,db)
 
 
-def get_tasks(db:Session,user_id:int):
+def get_tasks(db:Session):
     return task_repository.get_tasks(db)
 
 def get_task_by_id(db: Session, id_task: int):
@@ -32,3 +32,7 @@ def update_task(db: Session,task_id: int,  task_data: TaskCreate) -> Task:
         setattr(task, key, value)
 
     return task_repository.update_task(db, task)
+
+
+def delete_task(db, task_id):
+    return task_repository.delete_task(db, task_id)

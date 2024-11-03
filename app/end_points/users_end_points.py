@@ -10,17 +10,17 @@ from app.services.user_service import register_user, authenticate_user
 router = APIRouter()
 
 
-@router.get("/allusers/")
+@router.get("/allusers/",tags=["Utilisateurs"])
 async def get_users(db: db_dependency, token: str = Depends(verify_jwt)):
     return user_service.get_users(db)
 
 
-@router.post("/register", response_model=UserResponse)
+@router.post("/register", response_model=UserResponse,tags=["Utilisateurs"])
 def register(user: UserCreate, db: db_dependency):
     return register_user(db, user)
 
 
-@router.post("/login")
+@router.post("/login",tags=["Utilisateurs"])
 async def login(
     form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)
 ):
