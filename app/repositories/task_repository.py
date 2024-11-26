@@ -12,6 +12,7 @@ def create_task_repo(task:TaskCreate , db:Session):
         due_date=task.due_date,
         status=task.status,
         user_id=task.user_id,
+        category_id = task.category_id,
     )
     db.add(task_db)
     db.commit()

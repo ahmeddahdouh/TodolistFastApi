@@ -11,6 +11,7 @@ class TaskBase(BaseModel):
     priority: int
     status : str
     user_id : int
+    category_id : int
     class Config:
         orm_mode = True
 

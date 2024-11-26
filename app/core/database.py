@@ -4,8 +4,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 
 load_dotenv()
-
-# Récupérer les variables d'environnement
 db_user = os.environ["DB_USER"]
 db_password = os.environ["DB_PASSWORD"]
 db_host = os.environ["DB_HOST"]

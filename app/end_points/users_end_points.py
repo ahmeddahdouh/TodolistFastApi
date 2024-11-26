@@ -6,8 +6,16 @@ from app.core.security import verify_jwt
 from app.schema.user_schema import UserCreate, UserResponse
 from app.services import user_service
 from app.services.user_service import register_user, authenticate_user
+from fastapi.responses import HTMLResponse
 
 router = APIRouter()
+
+
+@router.get("/", response_class=HTMLResponse)
+async def read_root():
+    with open("static/index.html") as f:
+        html_content = f.read()
+    return html_content
 
 
 @router.get("/allusers/",tags=["Utilisateurs"])
